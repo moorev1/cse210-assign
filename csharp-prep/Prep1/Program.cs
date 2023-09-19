@@ -13,7 +13,7 @@ class Program
         string lastName = Console.ReadLine();
 
         // Display the name in the specified format
-        Console.WriteLine("Your name is =={0}, {1}, {0}", lastName, firstName);
+        Console.WriteLine("Your name is {0}, {1}, {0}", lastName, firstName);
 
         // Pause to keep the console window open
         Console.ReadLine();
