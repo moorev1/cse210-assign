@@ -1,5 +1,3 @@
-// WritingAssignment.cs
-
 using System;
 
 public class WritingAssignment : Assignment
@@ -14,10 +12,8 @@ public class WritingAssignment : Assignment
 
     public void GetWritingInformation()
     {
-        string studentName = GetStudentName();
-        string assignmentName = GetAssignmentName();
-
-        Console.WriteLine($"{studentName} - {assignmentName}");
+        string studentName = GetSummary();
+        Console.WriteLine($"{studentName}");
         Console.WriteLine($"The Causes of {_topic} by {studentName}");
     }
 }
