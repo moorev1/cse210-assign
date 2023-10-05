@@ -1,25 +1,28 @@
-// Assignment.cs
-
-using System;
-
 public class Assignment
 {
-    protected string _studentName;
-    private string _assignmentName;
+    private string _studentName;
+    private string _topic;
 
-    public Assignment(string studentName, string assignmentName)
+    public Assignment(string studentName, string topic)
     {
         _studentName = studentName;
-        _assignmentName = assignmentName;
+        _topic = topic;
     }
 
+    // We will provide Getters for our private member variables so they can be accessed
+    // later both outside the class as well is in derived classes.
     public string GetStudentName()
     {
         return _studentName;
     }
 
-    public string GetAssignmentName()
+    public string GetTopic()
     {
-        return _assignmentName;
+        return _topic;
+    }
+
+    public string GetSummary()
+    {
+        return _studentName + " - " + _topic;
     }
 }
