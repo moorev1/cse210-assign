@@ -1,9 +1,10 @@
-using System;
+// Program.cs
 
 class Program
 {
-    static void Main(string[] args)
+    static void Main()
     {
-        Console.WriteLine("Hello Learning04 World!");
+        WritingAssignment writingAssignment = new WritingAssignment("Vincent Moore", "European History", "World War II");
+        writingAssignment.GetWritingInformation();
     }
 }
