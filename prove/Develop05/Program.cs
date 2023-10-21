@@ -1,12 +1,14 @@
 using System;
+using System.Collections.Generic;
 
-class Program
+public class Program
 {
+    static List<Goal> goals = new List<Goal>();
+
     static void Main()
     {
-        QuestSystem questSystem = new QuestSystem();
-
-        while (true)
+        int choice;
+        do
         {
             Console.WriteLine("Menu Options:");
             Console.WriteLine("1. Create New Goal");
@@ -17,72 +19,69 @@ class Program
             Console.WriteLine("6. Quit");
 
             Console.Write("Select a choice from the menu: ");
-            string choice = Console.ReadLine();
+            choice = Convert.ToInt32(Console.ReadLine());
 
             switch (choice)
             {
-                case "1":
-                    Console.WriteLine("The types of goals are:");
-                    Console.WriteLine("1. Simple goal");
-                    Console.WriteLine("2. Eternal goal");
-                    Console.WriteLine("3. Checklist Goal");
-
-                    Console.Write("What type of goal would you like to create? ");
-                    string goalTypeChoice = Console.ReadLine();
-
-                    Console.Write("Enter goal name: ");
-                    string name = Console.ReadLine();
-                    Console.Write("Enter goal value: ");
-                    int value = int.Parse(Console.ReadLine());
-
-                    if (goalTypeChoice == "1")
-                    {
-                        questSystem.CreateNewGoal("simple", name, value);
-                    }
-                    else if (goalTypeChoice == "2")
-                    {
-                        questSystem.CreateNewGoal("eternal", name, value);
-                    }
-                    else if (goalTypeChoice == "3")
-                    {
-                        Console.Write("Enter target count: ");
-                        int targetCount = int.Parse(Console.ReadLine());
-                        Console.Write("Enter bonus value: ");
-                        int bonusValue = int.Parse(Console.ReadLine());
-                        questSystem.CreateNewGoal("checklist", name, value, targetCount, bonusValue);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Invalid goal type choice. Please try again.");
-                    }
+                case 1:
+                    CreateNewGoal();
                     break;
-
-                case "2":
-                    questSystem.ListGoals();
+                case 2:
+                    ListGoals();
                     break;
-
-                case "3":
-                    questSystem.SaveGoals();
-                    break;
-
-                case "4":
-                    questSystem.LoadGoals();
-                    break;
-
-                case "5":
-                    Console.Write("Enter the name of the goal to record: ");
-                    string goalName = Console.ReadLine();
-                    questSystem.RecordGoal(goalName);
-                    break;
-
-                case "6":
-                    Environment.Exit(0);
-                    break;
-
-                default:
-                    Console.WriteLine("Invalid choice. Please choose a valid option.");
-                    break;
+                // Add cases for other options
             }
+
+        } while (choice != 6);
+    }
+
+    static void CreateNewGoal()
+    {
+        Console.WriteLine("The types of goals are:");
+        Console.WriteLine("1. Simple goal");
+        Console.WriteLine("2. Eternal goal");
+        Console.WriteLine("3. Checklist Goal");
+
+        Console.Write("What type of goal would you like to create? ");
+        int goalType = Convert.ToInt32(Console.ReadLine());
+
+        Console.Write("What is the name of your goal? ");
+        string name = Console.ReadLine();
+
+        Console.Write("What is the short description of it? ");
+        string description = Console.ReadLine();
+
+        Console.Write("What is the amount of point associated with this goal? ");
+        int points = Convert.ToInt32(Console.ReadLine());
+
+        switch (goalType)
+        {
+            case 1:
+                goals.Add(new SimpleGoal(name, description, points));
+                break;
+            case 2:
+                goals.Add(new EternalGoal(name, description, points));
+                break;
+            case 3:
+                Console.Write("How many times should this goal be accomplished? ");
+                int targetCount = Convert.ToInt32(Console.ReadLine());
+                goals.Add(new ChecklistGoal(name, description, points, targetCount));
+                break;
+            default:
+                Console.WriteLine("Invalid goal type");
+                break;
         }
     }
+
+    static void ListGoals()
+    {
+        Console.WriteLine("The goals are:");
+        for (int i = 0; i < goals.Count; i++)
+        {
+            Console.Write($"{i + 1}. ");
+            goals[i].Display();
+        }
+    }
+
+    // Add methods for other menu options
 }

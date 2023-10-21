@@ -1,13 +1,12 @@
 public class EternalGoal : Goal
 {
-    public EternalGoal(string name, int value) : base(name, value)
+    public EternalGoal(string name, string description, int points)
+        : base(name, description, points)
     {
-        // Additional initialization for eternal goals, if needed
     }
 
-    public override int RecordProgress()
+    public override void Complete()
     {
-        // Eternal goals are never completed, so no progress to record
-        return 0;
+        Console.WriteLine($"Eternal Goal Recorded: {name} (+{points} points)");
     }
 }

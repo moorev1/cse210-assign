@@ -1,18 +1,25 @@
+using System;
+
 public class Goal
 {
-    public string Name { get; set; }
-    public int Value { get; set; }
-    public bool Completed { get; set; }
+    private string name;
+    private string description;
+    protected int points;
 
-    public Goal(string name, int value)
+    public Goal(string name, string description, int points)
     {
-        Name = name;
-        Value = value;
-        Completed = false;
+        this.name = name;
+        this.description = description;
+        this.points = points;
     }
 
-    public virtual int RecordProgress()
+    public virtual void Display()
     {
-        return 0;
+        Console.WriteLine($"{name} - {description}");
+    }
+
+    public virtual void Complete()
+    {
+        Console.WriteLine($"Goal Completed: {name} (+{points} points)");
     }
 }

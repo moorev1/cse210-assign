@@ -1,27 +1,31 @@
 public class ChecklistGoal : Goal
 {
-    public int TargetCount { get; set; }
-    public int CurrentCount { get; set; }
-    public int BonusValue { get; set; }
+    private int targetCount;
+    private int currentCount;
 
-    public ChecklistGoal(string name, int value, int targetCount, int bonusValue) : base(name, value)
+    public ChecklistGoal(string name, string description, int points, int targetCount)
+        : base(name, description, points)
     {
-        TargetCount = targetCount;
-        BonusValue = bonusValue;
+        this.targetCount = targetCount;
+        this.currentCount = 0;
     }
 
-    public override int RecordProgress()
+    public override void Display()
     {
-        CurrentCount++;
+        Console.WriteLine($"{name} - {description} (Completed {currentCount}/{targetCount} times)");
+    }
 
-        if (CurrentCount == TargetCount)
+    public override void Complete()
+    {
+        currentCount++;
+
+        if (currentCount == targetCount)
         {
-            Completed = true;
-            return Value + BonusValue;
+            Console.WriteLine($"Checklist Goal Completed: {name} (+{points} points)");
         }
         else
         {
-            return Value;
+            Console.WriteLine($"Checklist Goal Recorded: {name} (+{points} points)");
         }
     }
 }

@@ -1,12 +1,8 @@
 public class SimpleGoal : Goal
 {
-    public SimpleGoal(string name, int value) : base(name, value)
+    public SimpleGoal(string name, string description, int points)
+        : base(name, description, points)
     {
     }
-
-    public override int RecordProgress()
-    {
-        Completed = true;
-        return Value;
-    }
+    // Additional methods or overrides specific to SimpleGoal
 }
